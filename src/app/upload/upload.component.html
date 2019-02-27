@@ -1,0 +1,113 @@
+
+<!-- <img *ngFor='let url of urls'  [src]="url" height="200"> <br/>
+
+<input type='file' (change)="onSelectFile($event)" multiple> -->
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Add image file</h2>
+
+      <div *ngFor="let i of images">
+      
+      <label class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
+        <input type="file" name="photo" (change)="onFileSelected($event)" class="sr-only" id="inputImage" accept="image/*">
+        <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="Import image with Blob URLs">
+              <span class="fa fa-upload"></span>
+            </span>
+      </label>
+      <br>
+      <button *ngIf="images.length > 1" class="btn btn-success" (click)="uploadMoreImages()"><i class="fa fa-upload"></i>Upload More Images</button>
+      <br><br>
+      <button *ngIf="" class="btn btn-warning" (click)="showToolbarFun()"> Show Toolbar</button>
+
+
+    </div>
+    </div>
+  </div>
+
+  
+  <div class="row">
+    <div class="col-xs-12 col-sm-9">
+
+
+      <angular-cropper #angularCropper *ngIf="showCropper && imageUrl"
+                       [cropperOptions]="cropperConfig"
+                       [imageUrl]="imageUrl"
+                       (zoom)="zoomManual()"
+                       (ready)="readyImage($event)"
+                       (cropend)="cropendImage($event)">
+      </angular-cropper>
+    
+
+      <div *ngIf="!showCropper && imageUrl" class="container-preloader">
+        <div class="dash uno"></div>
+        <div class="dash dos"></div>
+        <div class="dash tres"></div>
+        <div class="dash cuatro"></div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-3 crop-res">
+      <img *ngIf="cropperRes || imageUrl" [src]="cropperRes || imageUrl">
+    </div>
+  </div>
+  <div class="row" *ngIf="imageUrl" id="actions">
+    <div class="col-sm-12">
+      <div class="docs-buttons">
+         <h3>Toolbar:</h3>
+
+        <div class="btn-group">
+          <button (click)="zoom('positive')" type="button" class="btn btn-primary" data-method="zoom" data-option="0.1" title="Zoom In">
+              <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="cropper.zoom(0.1)">
+                <span class="fa fa-search-plus"></span>
+              </span>
+          </button>
+          <button (click)="zoom('negative')" type="button" class="btn btn-primary" data-method="zoom" data-option="-0.1" title="Zoom Out">
+              <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="cropper.zoom(-0.1)">
+                <span class="fa fa-search-minus"></span>
+              </span>
+          </button>
+        </div>
+
+        <div class="btn-group">
+          <button (click)="rotate('left')" type="button" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">
+            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="cropper.rotate(-45)">
+              <span class="fa fa-rotate-left"></span>
+            </span>
+          </button>
+          <button (click)="rotate('right')" type="button" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">
+            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="cropper.rotate(45)">
+              <span class="fa fa-rotate-right"></span>
+            </span>
+          </button>
+        </div>
+
+        <div class="btn-group">
+          <button (click)="clear()" type="button" class="btn btn-primary" data-method="clear" title="Clear">
+            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="cropper.clear()">
+              <span class="fa fa-remove"></span>
+            </span>
+          </button>
+        </div>
+
+        <div class="btn-group">
+          <button (click)="reset()" type="button" class="btn btn-primary" data-method="reset" title="Reset">
+            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="cropper.reset()">
+              <span class="fa fa-refresh"></span>
+            </span>
+          </button>
+        </div>
+
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary" data-method="reset" title="Reset">
+            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="cropper.reset()">
+              <span class="fa "></span>
+            </span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
